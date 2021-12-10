@@ -132,7 +132,8 @@ export class BurbujasComponent implements OnInit {
       for (let estacion of ciudadEstacion.estaciones) {
         // Solicitamos los valores para cada estación
         // Y vamos preparando las series
-        await this.aqiService.getEstacionPromise(estacion.codigo).then(b => {
+        await this.aqiService.getEstacionPromise(estacion.codigo)
+        .then(b => {
           /// Cargar aquí con push los valores de las series.
           /// Se declararían sin valores y aquí se pondrían todos los valores
           /// La duda es si se pueden cargar los arrays de documentos data
@@ -154,7 +155,8 @@ export class BurbujasComponent implements OnInit {
           arraySeriesContaminantes[2].serie[ciudadEstacion.indiceCiudad].data[
             estacion.indiceEstacion
           ].value = b.data.iaqi.o3.v;
-        });
+        })
+        .catch(error => {console.log(error)})
       }
     }
   }
